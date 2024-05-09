@@ -1,0 +1,476 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Nome da Sua API",
+        "description": "Uma breve descrição da sua API",
+        "contact": {
+            "email": "seuemail@exemplo.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:9086",
+            "description": "API Server"
+        }
+    ],
+    "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Log in a user and return authentication token and user data",
+                "description": "Log in a user with the provided credentials and return authentication token along with user data",
+                "operationId": "a3b306d14572d1f4bd6c064b3233e7b8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "description": "User's email address",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "User's account password",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "email": "test@example.com",
+                                    "password": "teste123"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful login",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Login bem-sucedido"
+                                        },
+                                        "access_token": {
+                                            "description": "Bearer token for authentication",
+                                            "type": "string",
+                                            "example": "1|j4P3gjdkkmFQ..."
+                                        },
+                                        "token_type": {
+                                            "type": "string",
+                                            "example": "Bearer"
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "nome": {
+                                                    "type": "string",
+                                                    "example": "Usuário X"
+                                                },
+                                                "cpf": {
+                                                    "type": "string",
+                                                    "example": "99999999999"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "test@example.com"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2024-01-01T12:00:00Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2024-01-01T12:00:00Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register a user",
+                "operationId": "8a56853624e025573120a09a4c75d468",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "cpf": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "nome": "Usuário X",
+                                    "cpf": "99999999999",
+                                    "email": "test@example.com",
+                                    "password": "teste123"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User successfully registered",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Usuário registrado com sucesso"
+                                        },
+                                        "access_token": {
+                                            "description": "Bearer token for authentication",
+                                            "type": "string",
+                                            "example": "1|l9fwFjeFJ38..."
+                                        },
+                                        "token_type": {
+                                            "type": "string",
+                                            "example": "Bearer"
+                                        },
+                                        "user": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "nome": {
+                                                    "type": "string",
+                                                    "example": "Usuário X"
+                                                },
+                                                "cpf": {
+                                                    "type": "string",
+                                                    "example": "99999999999"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "test@example.com"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2024-01-01T12:00:00Z"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2024-01-01T12:00:00Z"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/api/enderecos": {
+            "post": {
+                "tags": [
+                    "Enderecos"
+                ],
+                "summary": "Create a new address",
+                "description": "Create a new address based on the provided data",
+                "operationId": "7503e124e0fd8144c6a9901d2e08bb19",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "logradouro": {
+                                        "type": "string",
+                                        "example": "Rua Exemplo"
+                                    },
+                                    "bairro": {
+                                        "type": "string",
+                                        "example": "Centro"
+                                    },
+                                    "regiao": {
+                                        "type": "string",
+                                        "example": "Norte"
+                                    },
+                                    "numero": {
+                                        "type": "string",
+                                        "example": "123"
+                                    },
+                                    "cep": {
+                                        "type": "string",
+                                        "example": "12345-678"
+                                    },
+                                    "cidade": {
+                                        "type": "string",
+                                        "example": "São Paulo"
+                                    },
+                                    "estado": {
+                                        "type": "string",
+                                        "example": "SP"
+                                    },
+                                    "ponto_de_referencia": {
+                                        "type": "string",
+                                        "example": "Perto do mercado"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Address created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Endereco"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid data"
+                    },
+                    "500": {
+                        "description": "Server error"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/user": {
+            "get": {
+                "tags": [
+                    "Usuario"
+                ],
+                "summary": "Get authenticated user data",
+                "operationId": "2130b7cce3aebae5b2f0aecd8f3cf0d3",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Cidade": {
+                "title": "Cidade",
+                "description": "Modelo de Cidade",
+                "properties": {
+                    "id": {
+                        "description": "ID da cidade",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "nome": {
+                        "description": "Nome da cidade",
+                        "type": "string",
+                        "example": "São Paulo"
+                    },
+                    "estado_id": {
+                        "description": "ID do estado",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "": {
+                        "$ref": "#/components/schemas/Estado"
+                    }
+                },
+                "type": "object"
+            },
+            "Endereco": {
+                "title": "Endereco",
+                "description": "Modelo de Endereco",
+                "properties": {
+                    "id": {
+                        "description": "ID do endereço",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "logradouro": {
+                        "description": "Nome da rua",
+                        "type": "string",
+                        "example": "Rua Exemplo"
+                    },
+                    "bairro": {
+                        "description": "Nome do bairro",
+                        "type": "string",
+                        "example": "Centro"
+                    },
+                    "regiao": {
+                        "description": "Nome da região",
+                        "type": "string",
+                        "example": "Norte"
+                    },
+                    "numero": {
+                        "description": "Número do endereço",
+                        "type": "string",
+                        "example": "123"
+                    },
+                    "cep": {
+                        "description": "CEP do endereço",
+                        "type": "string",
+                        "example": "12345-678"
+                    },
+                    "cidade_id": {
+                        "description": "ID da cidade",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "ponto_de_referencia": {
+                        "description": "Ponto de referência",
+                        "type": "string",
+                        "example": "Perto do mercado"
+                    },
+                    "latitude": {
+                        "description": "Latitude",
+                        "type": "string",
+                        "example": "-23.5505"
+                    },
+                    "longitude": {
+                        "description": "Longitude",
+                        "type": "integer",
+                        "example": "-46.6333"
+                    },
+                    "": {
+                        "$ref": "#/components/schemas/Cidade"
+                    }
+                },
+                "type": "object"
+            },
+            "Estado": {
+                "title": "Estado",
+                "description": "Modelo de Estado",
+                "properties": {
+                    "id": {
+                        "description": "ID do estado",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "nome": {
+                        "description": "Nome do estado",
+                        "type": "string",
+                        "example": "São Paulo"
+                    }
+                },
+                "type": "object"
+            },
+            "Usuario": {
+                "properties": {
+                    "id": {
+                        "description": "ID do Usuário",
+                        "type": "integer"
+                    },
+                    "nome": {
+                        "description": "Nome do Usuário",
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "description": "Nome do Usuário",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Email do Usuário",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "description": "Data de Criação do Usuário",
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "description": "Data da Última Atualização do Usuário",
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+stages:
+  - build
+  - deploy
+  - deploy-k8s
+
+build_image:
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^[0-9]+\.[0-9]+\.[0-9]+$/ || $CI_COMMIT_TAG =~ /^[0-9]+\.[0-9]+\.[0-9]+-staging.*/
+  image: docker:20.10.16
+  stage: build
+  before_script:
+    - "REGISTRY=$(echo $CI_REGISTRY| cut -d: -f1)"
+    - IMAGE=$(echo $REGISTRY/$CI_PROJECT_PATH):${CI_COMMIT_TAG:-latest}
+  script:
+    - |
+      docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $REGISTRY
+      docker build \
+        -t $IMAGE \
+      .
+    - docker push $IMAGE
+  tags:
+    - runner-1
+
+include:
+  - project: 'iac/reusable-pipelines'
+    ref: main
+    file: 'pipelines/template-deploy.yaml' 
